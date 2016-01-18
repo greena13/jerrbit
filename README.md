@@ -35,7 +35,7 @@ try {
 
 ### Airbrake Options
 
-Jerrbit supports all of the [Airbrake V3 API properties](https://airbrake.io/docs/#create-notice-v3) and a lot of them Jerrbit sets for you, but all values can be overwritten if you need.
+Jerrbit supports all of the [Airbrake V3 API properties](https://airbrake.io/docs/#create-notice-v3) and sets a lot of them for you, but all values can be overwritten if you need.
 
 Field | Required | Supplied by Errbit | Default value is set in | Description
 ----- | -------- | ------------------ | ----------- | ----------
@@ -48,23 +48,23 @@ Field | Required | Supplied by Errbit | Default value is set in | Description
 `errors/{i}/backtrace/{i}/column` | No | Yes | `notify` | The line’s column number in this entry of the backtrace.
 `errors/{i}/backtrace/{i}/function` | No | Yes | `notify` | When available, the function or method name in this entry of the backtrace.
 `context` | No | No | NA | An object describing additional context for this error.
-`context/notifier`| Yes | No | NA | An object describing the notifier client library.
+`context/notifier`| Yes | Yes | N/A | An object describing the notifier client library.
 `context/notifier/name` | Yes | Yes | `new` | The name of the notifier client submitting the request, e.g. “airbrake-js”.
 `context/notifier/version` | Yes| Yes | `new` | The version number of the notifier client submitting the request, e.g. “1.2.3”.
 `context/notifier/url` | Yes | Yes | `new` | A URL at which more information can be obtained concerning the notifier client.
 `context/environment` | No | 'development' | `new` |  The name of the server environment in which the error occurred, e.g. “staging”, “production”, etc.
-`context/component` | No | No | NA | The component or module in which the error occurred. In MVC frameworks like Rails, this should be set to the controller. Otherwise, this can be set to a route or other request category.
-`context/action` | No | No | NA | The action in which the error occurred. If each request is routed to a controller action, this should be set here. Otherwise, this can be set to a method or other request subcategory.
+`context/component` | No | No | N/A | The component or module in which the error occurred. In MVC frameworks like Rails, this should be set to the controller. Otherwise, this can be set to a route or other request category.
+`context/action` | No | No | N/A | The action in which the error occurred. If each request is routed to a controller action, this should be set here. Otherwise, this can be set to a method or other request subcategory.
 `context/os` | No | Yes | `new` | Details of the operating system on which the error occurred.
 `context/language` | No | 'JavaScript' | `new` | Describe the language on which the error occurred, e.g. “Ruby 2.1.1”.
 `context/version` | No | No |  | Describe the application version, e.g. “v1.2.3”.
 `context/url` | No | Yes | `notify` | The application’s URL.
 `context/userAgent` | No | Yes | `new` | The requesting browser’s full user-agent string.
-`context/rootDirectory` | No | No | NA | The application’s root directory path.
-`context/user/id` | No | No | NA | If applicable, the current user’s ID.
-`context/user/name` | No | No | NA | If applicable, the current user’s username.
-`context/user/email` | No | No | NA | If applicable, the current user’s email address.
-`environment` | No | No | NA | An object containing the current environment variables. Where the key is the variable name, e.g. { "PORT": "443", "CODE_NAME": "gorilla" }.
+`context/rootDirectory` | No | No | N/A | The application’s root directory path.
+`context/user/id` | No | No | N/A | If applicable, the current user’s ID.
+`context/user/name` | No | No | N/A | If applicable, the current user’s username.
+`context/user/email` | No | No | N/A | If applicable, the current user’s email address.
+`environment` | No | No | N/A | An object containing the current environment variables. Where the key is the variable name, e.g. { "PORT": "443", "CODE_NAME": "gorilla" }.
 `session` | No | Yes | `notify` | An object containing the current session variables. Where the key is the variable name, e.g. { "basket_total": "1234", "user_id": "123" }.
 `params` | No | Yes | `notify` | An object containing the request parameters. Where the key is the parameter name, e.g. { "page": "3", "sort": "desc" }.
 
