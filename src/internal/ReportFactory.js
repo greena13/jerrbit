@@ -22,8 +22,8 @@ const DEFAULT_STATIC_PROPERTIES = {
   environment: {}
 };
 
-const ReportFactory = function(customContext = {}){
-  const sharedReportData = objectMerge(DEFAULT_STATIC_PROPERTIES, {context: customContext});
+const ReportFactory = function(customOptions = {}){
+  const sharedReportData = objectMerge(DEFAULT_STATIC_PROPERTIES, customOptions);
   this.environment = sharedReportData.context.environment;
 
   this.build = function(error, reportContext = {}){
