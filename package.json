@@ -1,0 +1,41 @@
+{
+  "name": "jerrbit",
+  "version": "0.0.1",
+  "description": "Report client-side, browser events and exceptions to an Errbit or Airbrake service",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "jasmine",
+    "compile": "babel --presets es2015 src/ --out-dir lib/",
+    "prepublish": "npm run compile"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/greena13/jerrbit.git"
+  },
+  "keywords": [
+    "Errbit",
+    "Airbrake",
+    "exception",
+    "reporting",
+    "monitoring",
+    "browser",
+    "client-side"
+  ],
+  "author": "Aleck Greenham",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^5.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/greena13/jerrbit/issues"
+  },
+  "homepage": "https://github.com/greena13/jerrbit#readme",
+  "dependencies": {
+    "cookie": "^0.2.3",
+    "fetchival": "^0.3.1",
+    "object-merge": "^2.5.1",
+    "platform": "^1.3.1",
+    "query-string": "^3.0.0",
+    "stack-trace": "0.0.9"
+  }
+}
