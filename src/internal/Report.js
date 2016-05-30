@@ -32,9 +32,9 @@ const Report = function(error, options){
     })
   });
 
-  return objectMerge(objectMerge(generateRunTimeProperties(), options, {
+  return objectMerge(generateRunTimeProperties(), options, {
       errors: [errorDescription]
-    })
+    }
   );
 };
 
