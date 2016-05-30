@@ -26,6 +26,12 @@
   "devDependencies": {
     "babel": "^5.0.0"
   },
+  "files": [
+    "lib",
+    "package.json",
+    "README.md",
+    "LICENSE.txt"
+  ],
   "bugs": {
     "url": "https://github.com/greena13/jerrbit/issues"
   },
