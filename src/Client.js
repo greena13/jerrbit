@@ -21,7 +21,7 @@ function hasTrailingSlash(string){
   endsWith(string, '/')
 }
 
-function serverUlr(base, identifier){
+function serverUrl(base, identifier){
   base = hasTrailingSlash(base) ? base : base + '/';
   return base + 'api/v3/projects/' + identifier + '/notices';
 }
@@ -50,7 +50,7 @@ const Client = function(options){
   } else {
     this.notify = function(exception, context = {}){
       const report = this.reportFactory.build(exception, context);
-      sendReport(serverUlr(this.host, this.projectKey), report);
+      sendReport(serverUrl(this.host, this.projectKey), report);
     };
   }
 };
