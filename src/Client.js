@@ -1,12 +1,15 @@
 'use strict';
 
-import fetchival from 'fetchival';
+import 'whatwg-fetch';
 import ReportFactory from './internal/ReportFactory';
 
 const DEFAULT_AIRBRAKE_URL = 'https://api.airbrake.io';
 
 function sendReport(destination, report){
-  fetchival(destination).post(report);
+  fetch(destination, {
+    method: 'POST',
+    body: JSON.stringify(report)
+  })
 }
 
 function includesItem(array, item) {

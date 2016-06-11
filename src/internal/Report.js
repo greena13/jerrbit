@@ -1,6 +1,5 @@
 'use strict';
 
-import fetch from 'fetchival';
 import objectMerge from 'object-merge';
 import stackTrace from 'stack-trace';
 import queryString from 'query-string';
