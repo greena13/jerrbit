@@ -29,33 +29,35 @@ function serverUrl(base, identifier){
   return base + 'api/v3/projects/' + identifier + '/notices';
 }
 
-const Client = function(options){
-  this.host = options.host || DEFAULT_AIRBRAKE_URL;
-  delete options.host;
+class Client {
+  constructor(options) {
+    this.host = options.host || DEFAULT_AIRBRAKE_URL;
+    delete options.host;
 
-  this.projectKey = options.projectId || options.projectKey;
-  delete options.projectId;
-  delete options.projectKey;
+    this.projectKey = options.projectId || options.projectKey;
+    delete options.projectId;
+    delete options.projectKey;
 
-  this.ignoredEnvironments = options.ignoredEnvironments || ['development', 'test'];
-  delete options.ignoredEnvironments;
+    this.ignoredEnvironments = options.ignoredEnvironments || ['development', 'test'];
+    delete options.ignoredEnvironments;
 
-  this.reportFactory = new ReportFactory(options);
+    this.reportFactory = new ReportFactory(options);
 
-  const isIgnoredEnvironment = (environment)=>{
-    return includesItem(this.ignoredEnvironments, environment);
-  };
-
-  if(isIgnoredEnvironment(this.reportFactory.environment)){
-    this.notify = function(exception, context = {}){
-      // Do nothing
-    }
-  } else {
-    this.notify = function(exception, context = {}){
-      const report = this.reportFactory.build(exception, context);
-      sendReport(serverUrl(this.host, this.projectKey), report);
+    const isIgnoredEnvironment = (environment)=>{
+      return includesItem(this.ignoredEnvironments, environment);
     };
+
+    if(isIgnoredEnvironment(this.reportFactory.environment)){
+      this.notify = function(exception, context = {}){
+        // Do nothing
+      }
+    } else {
+      this.notify = function(exception, context = {}){
+        const report = this.reportFactory.build(exception, context);
+        sendReport(serverUrl(this.host, this.projectKey), report);
+      };
+    }
   }
-};
+}
 
 export default Client;
