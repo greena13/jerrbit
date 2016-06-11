@@ -10,7 +10,9 @@ var Client = require('jerrbit').Client;
 var errbitClient = new Client({
   host: 'http://errbit.your-service.com',
   projectKey: 'ProjectAPIKey',
-  environment: 'production'
+  context: {
+    environment: 'production'
+  }
 });
 
 try {
@@ -18,7 +20,9 @@ try {
 
 } catch(error){
   errbitClient.notify(error, {
-    version: '1.1.1'  
+    context: {
+      version: '1.1.1'
+    }
   });
   
   throw(error);
@@ -76,8 +80,8 @@ You can overwrite the default values by either specifying them when instantiatin
 var errbitClient = new Client({
   host: 'http://errbit.your-service.com',
   projectKey: 'ProjectAPIKey',
-  environment: 'production',
   context: {
+    environment: 'production',
     language: 'JavaScript & XML'
   }
 });
