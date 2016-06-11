@@ -1,6 +1,6 @@
 {
   "name": "jerrbit",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Report client-side, browser events and exceptions to an Errbit or Airbrake service",
   "main": "lib/index.js",
   "scripts": {
