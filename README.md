@@ -1,5 +1,8 @@
 # Jerrbit
 
+[![npm](https://img.shields.io/npm/dm/jerrbit.svg)]()
+[![GitHub license](https://img.shields.io/github/license/greena13/jerrbit.svg)](https://github.com/greena13/jerrbit/blob/master/LICENSE)
+
 Report client-side, browser events and exceptions to an Errbit or Airbrake service
 
 ## Usage
@@ -24,7 +27,7 @@ try {
       version: '1.1.1'
     }
   });
-  
+
   throw(error);
 }
 ```
@@ -74,7 +77,7 @@ Field | Required | Supplied by Errbit | Default value is set in | Description
 
 ### Overwriting the default context values
 
-You can overwrite the default values by either specifying them when instantiating `Client` or when calling `notify`. Values that are not expected to change over the course of your application should be specified when instantiating `Client`. 
+You can overwrite the default values by either specifying them when instantiating `Client` or when calling `notify`. Values that are not expected to change over the course of your application should be specified when instantiating `Client`.
 
 ```javascript
 var errbitClient = new Client({
