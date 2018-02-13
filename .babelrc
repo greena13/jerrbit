@@ -1,0 +1,28 @@
+{
+  "presets": [
+    [
+      "es2015",
+      {
+        "modules": false
+      }
+    ]
+  ],
+
+  "plugins": [
+    "external-helpers"
+  ],
+
+  "env": {
+    "development": {
+      "plugins": [
+
+      ]
+    },
+
+    "production": {
+      "plugins": [
+        "remove-comments"
+      ]
+    }
+  }
+}
