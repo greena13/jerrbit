@@ -1,5 +1,3 @@
-'use strict';
-
 import 'whatwg-fetch';
 import ReportFactory from './internal/ReportFactory';
 
@@ -29,7 +27,24 @@ function serverUrl(base, identifier){
   return base + 'api/v3/projects/' + identifier + '/notices';
 }
 
+/**
+ * @class Client for Errbit or Airbrake monitoring service, capable of reporting
+ * errors and the context in which they occur, when they happen.
+ */
 class Client {
+  /**
+   * Creates a new instance of Client
+   *
+   * @param {Object} options A configuration hash
+   * @param {String} [options.host='https://api.airbrake.io'] The host url to send
+   *        all exception reports to.
+   * @param {String} [options.projectId] The id of the project registered in Airbrake
+   *        or Errbit. If unspecified, the projectKey is used instead.
+   * @param {String} [options.projectKey] The key of the project registered in
+   *        Airbrake or Errbit. This value is only used if projectId is not specified.
+   * @param {String[]} [options.ignoredEnvironments=['development', 'test']] List of
+   *        environments where errors should ignored service.
+   */
   constructor(options) {
     this.host = options.host || DEFAULT_AIRBRAKE_URL;
     delete options.host;
@@ -42,20 +57,26 @@ class Client {
     delete options.ignoredEnvironments;
 
     this.reportFactory = new ReportFactory(options);
+  }
 
-    const isIgnoredEnvironment = (environment)=>{
-      return includesItem(this.ignoredEnvironments, environment);
-    };
-
-    if(isIgnoredEnvironment(this.reportFactory.environment)){
-      this.notify = function(exception, context = {}){
-        // Do nothing
-      }
-    } else {
-      this.notify = function(exception, context = {}){
-        const report = this.reportFactory.build(exception, context);
-        sendReport(serverUrl(this.host, this.projectKey), report);
-      };
+  /**
+   * Sends an error report to the monitoring service if the environment is
+   * not listed in ignoredEnvironments
+   *
+   * @param {Error} exception The error object to be reports to the error service
+   * @param {Object} [context={}] Object containing information about the
+   *        circumstances under which the error occurred.
+   * @param {String} [context.context.url] The url on which the error occurred. This is
+   *        automatically set, if left unspecified.
+   * @param {Object} [context.params] An object containing the current url's query
+   *        parameters. This is automatically set, if left unspecified.
+   * @param {Object} [context.session] An object containing the contents of the user's
+   *        current session. This is automatically set, if left unspecified.
+   */
+  notify(exception, context = {}) {
+    if (!includesItem(this.ignoredEnvironments, this.reportFactory.environment)) {
+      const report = this.reportFactory.build(exception, context);
+      sendReport(serverUrl(this.host, this.projectKey), report);
     }
   }
 }
