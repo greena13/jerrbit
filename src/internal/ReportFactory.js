@@ -3,7 +3,7 @@ import { os } from 'platform';
 import stackTrace from 'stack-trace';
 import queryString from 'query-string';
 import cookie from 'cookie';
-import merge from 'lodash.merge';
+import merge from 'merge';
 
 const DEFAULT_STATIC_PROPERTIES = {
   context: {
@@ -101,7 +101,7 @@ class ReportFactory {
    *        to report errors. This is automatically set by Jerrbit to describe itself.
    */
   constructor(options = {}){
-    this._sharedReportData = merge({}, DEFAULT_STATIC_PROPERTIES, options);
+    this._sharedReportData = merge.recursive({}, DEFAULT_STATIC_PROPERTIES, options);
     this.environment = this._sharedReportData.context.environment;
   }
 
@@ -135,7 +135,7 @@ class ReportFactory {
       })
     });
 
-    return merge({},
+    return merge.recursive({},
         this._sharedReportData,
         generateRunTimeProperties(),
         { errors: [errorDescription] },
