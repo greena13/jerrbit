@@ -7,6 +7,8 @@ import resolve from 'rollup-plugin-node-resolve';
 import packageJSON from './package.json'
 import babel from 'rollup-plugin-babel';
 
+import { plugin as analyze } from 'rollup-plugin-analyzer'
+
 export default {
   input: 'src/index.js',
 
@@ -19,6 +21,8 @@ export default {
     babel({
       exclude: 'node_modules/(?!query-string)/**',
     }),
+
+    analyze(),
 
     commonjs({
       namedExports: {
