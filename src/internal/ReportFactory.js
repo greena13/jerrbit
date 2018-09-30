@@ -1,19 +1,18 @@
-import objectMerge from 'object-merge';
-import jerrbitDetails from '../../package.json';
-import platform from 'platform';
+import { os } from 'platform';
 
 import stackTrace from 'stack-trace';
 import queryString from 'query-string';
 import cookie from 'cookie';
+import merge from 'lodash.merge';
 
 const DEFAULT_STATIC_PROPERTIES = {
   context: {
     environment: 'development',
-    os: platform.os.toString(),
+    os: os.toString(),
     notifier: {
-      name: jerrbitDetails.name,
-      version: jerrbitDetails.version,
-      url: jerrbitDetails.repository.url.slice(4)
+      name: 'jerrbit',
+      version: 'JERBIT_VERSION',
+      url: 'https://github.com/greena13/jerrbit.git'
     },
 
     userAgent: navigator.userAgent
@@ -102,7 +101,7 @@ class ReportFactory {
    *        to report errors. This is automatically set by Jerrbit to describe itself.
    */
   constructor(options = {}){
-    this._sharedReportData = objectMerge(DEFAULT_STATIC_PROPERTIES, options);
+    this._sharedReportData = merge({}, DEFAULT_STATIC_PROPERTIES, options);
     this.environment = this._sharedReportData.context.environment;
   }
 
@@ -136,7 +135,7 @@ class ReportFactory {
       })
     });
 
-    return objectMerge(
+    return merge({},
         this._sharedReportData,
         generateRunTimeProperties(),
         { errors: [errorDescription] },

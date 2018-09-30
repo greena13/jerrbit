@@ -1,28 +1,13 @@
 {
+  "comments": false,
+
   "presets": [
     [
-      "es2015",
+      "@babel/preset-env",
       {
-        "modules": false
+        "forceAllTransforms": true,
+        "targets": "> 0.25%, not dead"
       }
     ]
-  ],
-
-  "plugins": [
-    "external-helpers"
-  ],
-
-  "env": {
-    "development": {
-      "plugins": [
-
-      ]
-    },
-
-    "production": {
-      "plugins": [
-        "remove-comments"
-      ]
-    }
-  }
+  ]
 }

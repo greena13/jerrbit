@@ -1,5 +1,3 @@
-'use strict';
-
 import Client from './Client';
 
 export default {

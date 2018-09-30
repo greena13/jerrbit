@@ -1,30 +1,37 @@
-import babel from 'rollup-plugin-babel';
+import commonjs from 'rollup-plugin-commonjs';
 import replace from 'rollup-plugin-replace';
 import { uglify } from 'rollup-plugin-uglify';
 import license from 'rollup-plugin-license';
 import path from 'path';
-import packageJSON from './package.json';
+import resolve from 'rollup-plugin-node-resolve';
+import packageJSON from './package.json'
+import babel from 'rollup-plugin-babel';
 
 export default {
   input: 'src/index.js',
 
   output: {
-    exports: 'named',
-    format: 'cjs'
+    name: 'Jerrbit',
+    format: 'umd'
   },
-
-  external: [
-    'cookie',
-    'object-merge',
-    'platform',
-    'query-string',
-    'stack-trace',
-    'whatwg-fetch'
-  ],
 
   plugins: [
     babel({
-      exclude: 'node_modules/**',
+      exclude: 'node_modules/(?!query-string)/**',
+    }),
+
+    commonjs({
+      namedExports: {
+        'node_modules/platform/platform.js': ['os']
+      },
+
+      exclude: [ 'node_modules/clone-function/src/**' ]
+    }),
+
+    resolve({
+      module: true,
+      main: true,
+      browser: true
     }),
 
     replace({
