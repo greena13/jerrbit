@@ -1,6 +1,6 @@
 {
   "name": "jerrbit",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "description": "Report client-side, browser events and exceptions to an Errbit or Airbrake service",
   "main": "index.js",
   "scripts": {
@@ -26,6 +26,7 @@
   ],
   "files": [
     "cjs",
+    "umd",
     "package.json",
     "README.md",
     "LICENSE",
